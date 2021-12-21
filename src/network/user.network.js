@@ -12,4 +12,5 @@ export function getUser() {
   //   path: '/user',
   //   params: ''
   // })
-} 
+}
+
