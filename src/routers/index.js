@@ -13,6 +13,7 @@ const Comment = () => import('views/comment/Comment')
 const Fans = () => import('views/fans/Fans.vue')
 const Star = () => import('views/star/Star.vue')
 
+
 // 1.安装插件 
 Vue.use(VueRouter)
 
@@ -20,7 +21,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '',
-    redirect: '/admin'
+    redirect: '/login'
   },
   {
     path: '/login',
@@ -36,7 +37,7 @@ const routes = [
     path: '/admin',
     name: 'Home',
     component: Home,
-    redirect: '/admin/user',
+    redirect: '/admin/user/info',
     children: [
       {
         path: '/admin/user',
@@ -44,12 +45,9 @@ const routes = [
         component: User
       },
       {
-        path: '/admin/user/Info',
-        name: 'Person',
+        path: '/admin/user/info',
+        name: 'Info',
         component: Info,
-        meta: {
-          title: '个人资料'
-        }
       },
       {
         path: '/admin/user/password',
@@ -92,7 +90,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode: 'history' 
+  mode: 'history'
 })
 
 export default router
