@@ -9,6 +9,7 @@ const Pwd = () => import('views/user/UserPwd.vue')
 const Article = () => import('views/article/Article')
 const ArticleAdd = () => import('views/article/ArticleAdd.vue')
 const ArticleList = () => import('views/article/ArticleList.vue')
+const ArticleUpdate = () => import('views/article/ArticleUpdate.vue')
 const Comment = () => import('views/comment/Comment')
 const Fans = () => import('views/fans/Fans.vue')
 const Star = () => import('views/star/Star.vue')
@@ -68,6 +69,11 @@ const routes = [
         path: '/admin/article/list',
         name: 'ArticleList',
         component: ArticleList
+      },
+      {
+        path: '/admin/article/update',
+        name: 'ArticleUpdate',
+        component: ArticleUpdate
       },
       {
         path: '/admin/comment',
