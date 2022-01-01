@@ -12,7 +12,12 @@ const store = new Vuex.Store({
   },
   mutations: {
     setUsername(state, user) {
-      state.user = user
+      const { username, avatar } = user;
+      if (username) {
+        state.user = user
+      } else if (avatar) {
+        state.user.avatar = avatar
+      }
     }
   },
 })

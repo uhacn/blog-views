@@ -3,7 +3,7 @@
     <el-form label-width="80px">
       <el-form-item label="头像">
         <div class="avatar-div">
-          <img :src="form.avatarUrl" class="small-img" />
+     
           <el-upload
             action="http://localhost:8000/upload/avatar"
             name="avatar"
@@ -11,7 +11,8 @@
             :show-file-list="false"
             :on-success="onSuccess"
           >
-            <el-button>上传</el-button>
+            <img v-if="url" :src="url" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </div>
       </el-form-item>
@@ -60,6 +61,7 @@
 </template>
 
 <script>
+import store from "../../store";
 import { updateUserInfo } from "network/user.network";
 
 export default {
@@ -70,12 +72,14 @@ export default {
       },
       form: {
         _id: "",
-        sex: "男",
+        usename: "",
+        sex: "",
         avatarUrl: "",
         desc: "",
         email: "",
         phone: "",
       },
+      url: "",
     };
   },
   created() {
@@ -83,7 +87,8 @@ export default {
   },
   methods: {
     onSuccess(res) {
-      this.form.avatarUrl = `http://localhost:8000/user/avatar/${res.username}`;
+      this.url = `http://localhost:8000/user/avatar/${res.username}`;
+      this.form.avatarUrl = this.url;
     },
     userinfoModify() {
       updateUserInfo(this.form)
@@ -92,6 +97,7 @@ export default {
             message: res.data.msg,
             type: res.data.code === 200 ? "success" : "error",
           });
+          store.commit("setUsername", { avatarUrl: this.url });
         })
         .catch((err) => {
           console.log(err);
@@ -110,5 +116,28 @@ export default {
 .avatar-div {
   display: flex;
   align-items: center;
+}
+.el-upload {
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 88px;
+  height: 88px;
+  line-height: 88px;
+  text-align: center;
+}
+.avatar {
+  width: 88px;
+  height: 88px;
+  display: block;
 }
 </style>           

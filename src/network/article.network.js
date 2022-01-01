@@ -2,12 +2,12 @@ import request from "./request";
 
 
 // 发布文章
-export function createArticle(form, content, createTime) {
+export function createArticle(form, content, createTime, date) {
   return request({
     method: "post",
     url: '/article',
     data: {
-      id: Date.now(),
+      id: date,
       title: form.title,
       createTime,
       stemFrom: form.stemFrom,

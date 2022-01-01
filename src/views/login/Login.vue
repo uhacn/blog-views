@@ -85,16 +85,14 @@ export default {
               password: this.form.password,
             })
               .then((res) => {
-                console.log(111);
                 this.$message({
                   message: "注册成功",
                   type: "success",
                 });
               })
               .catch((err) => {
-                console.log(11);
                 this.$message({
-                  message: "注册失败",
+                  message: err.response.data,
                   type: "error",
                 });
               });
@@ -102,16 +100,23 @@ export default {
             userLogin({
               username: this.form.username,
               password: this.form.password,
-            }).then((res) => {
-              sessionStorage.setItem('token', res.data.token);
-              this.$router.push({
-                path: "/admin",
+            })
+              .then((res) => {
+                sessionStorage.setItem("token", res.data.token);
+                this.$router.push({
+                  path: "/admin",
+                });
+                this.$message({
+                  message: "登录成功",
+                  type: "success",
+                });
+              })
+              .catch((err) => {
+                this.$message({
+                  message: err.response.data,
+                  type: "error",
+                });
               });
-              this.$message({
-                message: "登录成功",
-                type: "success",
-              });
-            });
           }
         }
       });

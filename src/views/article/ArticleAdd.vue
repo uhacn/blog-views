@@ -36,18 +36,22 @@ export default {
         author: this.$store.state.user.username,
       },
       editor: null,
+      date:''
     };
+  },
+  created() {
+    this.date = Date.now()
   },
   mounted() {
     //创建wangEditor实例
     this.editor = new Editor("#editor");
 
-    //配置上传图片的接口地址
-    // this.editor.config.uploadImgServer = `http://localhost:3000/upload/editor/img`
-    // this.editor.config.uploadFileName = 'editorFile'
-    // this.editor.config.uploadImgHeaders = {
-    //   authorization: "Bearer " + localStorage.token
-    // }
+    // 配置上传图片的接口地址
+    this.editor.config.uploadImgServer = `http://localhost:8000/upload/picture/${this.date}`;
+    this.editor.config.uploadFileName = "picture";
+    this.editor.config.uploadImgHeaders = {
+      authorization: "Bearer " + sessionStorage.token,
+    };
 
     //设置富文本编辑器高度
     this.editor.config.height = 380;
@@ -66,7 +70,7 @@ export default {
         date.getMonth() + 1
       }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
-      createArticle(this.form, content, createTime).then(res => {
+      createArticle(this.form, content, createTime, this.date).then((res) => {
         this.$message({
           message: res.data.msg,
           type: res.data.code === 200 ? "success" : "error",

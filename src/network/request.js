@@ -22,7 +22,8 @@ export default function request(config) {
   instance.interceptors.response.use(res => {
     return res
   }, err => {
-    console.log('响应失败', err)
+    return Promise.reject(err);
+    // console.log('响应失败', err)
   })
 
   // 3.发送真正的网络请求

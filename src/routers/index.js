@@ -21,7 +21,7 @@ Vue.use(VueRouter)
 // 2.创建router
 const routes = [
   {
-    path: '',
+    path: '/',
     redirect: '/login'
   },
   {
@@ -29,11 +29,6 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  // {
-  //   path: '/register',
-  //   name: 'Register',
-  //   component: Register
-  // },
   {
     path: '/admin',
     name: 'Home',

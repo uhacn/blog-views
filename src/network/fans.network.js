@@ -1,7 +1,7 @@
 import request from "./request";
 
 
-// 删除文章
+// 查询粉丝
 export function findFans(page, author) {
   return request({
     url: '/fans',

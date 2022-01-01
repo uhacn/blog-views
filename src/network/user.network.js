@@ -1,13 +1,5 @@
 import request from "./request";
 
-// 修改用户信息
-export function updateUserInfo(form) {
-  return request({
-    method: 'patch',
-    url: '/user/info',
-    data: form
-  })
-}
 
 // 用户注册
 export function userReg(user) {
@@ -33,4 +25,23 @@ export function userVerify() {
     url: '/user/verify',
   })
 }
+
+// 修改用户信息
+export function updateUserInfo(form) {
+  return request({
+    method: 'patch',
+    url: '/user/info',
+    data: form
+  })
+}
+
+// 修改密码
+export function updatePwd(user) {
+  return request({
+    method: 'patch',
+    url: '/user/pwd',
+    data: user
+  })
+}
+
 
